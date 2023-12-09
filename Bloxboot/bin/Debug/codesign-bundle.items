@@ -12,7 +12,7 @@
       <CodesignDisableTimestamp>true</CodesignDisableTimestamp>
       <CodesignKeychain></CodesignKeychain>
       <CodesignUseHardenedRuntime></CodesignUseHardenedRuntime>
-      <SourceProjectPath>/Users/bovanlaarhoven/Projects/Bloxboot/Bloxboot</SourceProjectPath>
+      <SourceProjectPath>/Users/bovanlaarhoven/Documents/GitHub/Bloxboot/Bloxboot</SourceProjectPath>
     </_CodesignBundle>
   </ItemGroup>
 </Project>

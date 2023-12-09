@@ -7,9 +7,9 @@
       <dSYMSourcePathExists>false</dSYMSourcePathExists>
       <NoSymbolStrip>true</NoSymbolStrip>
       <dSYMInfoPlistRelativePath>Bloxboot.app.dSYM\Contents\Info.plist</dSYMInfoPlistRelativePath>
-      <SymbolFile>/Users/bovanlaarhoven/Projects/Bloxboot/Bloxboot/obj/Debug/mtouch-symbols.list</SymbolFile>
+      <SymbolFile>/Users/bovanlaarhoven/Documents/GitHub/Bloxboot/Bloxboot/obj/Debug/mtouch-symbols.list</SymbolFile>
       <DSymName>Bloxboot.app.dSYM</DSymName>
-      <SourceProjectPath>/Users/bovanlaarhoven/Projects/Bloxboot/Bloxboot</SourceProjectPath>
+      <SourceProjectPath>/Users/bovanlaarhoven/Documents/GitHub/Bloxboot/Bloxboot</SourceProjectPath>
     </_PostProcessingItem>
   </ItemGroup>
 </Project>

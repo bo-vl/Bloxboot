@@ -15,7 +15,7 @@ namespace Bloxboot
 		{
 			base.ViewDidLoad ();
 
-			// Do any additional setup after loading the view.
+			Console.WriteLine("Loaded");
 		}
 
 		public override NSObject RepresentedObject {
