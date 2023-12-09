@@ -1,3 +1,6 @@
 # Bloxboot
 
-Little mac application im working on <:
+Little mac application im working on <: (For Roblox)
+
+## Features
+-change fps
