@@ -9,8 +9,6 @@ namespace Bloxboot
     {
         JsonManager jsonManager = new JsonManager();
         public int fps;
-        private const string JsonKey = "DFIntTaskSchedulerTargetFps";
-        private const string disablemetal = "FFlagDebugGraphicsDisableMetal";
 
         public ViewController(IntPtr handle) : base(handle)
         {
@@ -35,8 +33,8 @@ namespace Bloxboot
 
         partial void Save(NSButton sender)
         {
-            jsonManager.Add(JsonKey, fps);
-            jsonManager.Add(disablemetal, true);
+            jsonManager.Add("DFIntTaskSchedulerTargetFps", fps);
+            jsonManager.Add("FFlagDebugGraphicsDisableMetal", true);
             jsonManager.WriteFile();
         }
     }
