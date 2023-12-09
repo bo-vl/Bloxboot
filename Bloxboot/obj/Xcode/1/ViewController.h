@@ -14,7 +14,6 @@
 }
 
 @property (nonatomic, retain) IBOutlet NSTabView *tabs;
-- (IBAction)lighting:(NSComboBoxCell *)sender;
 
 - (IBAction)Framerate:(NSTextField *)sender;
 
