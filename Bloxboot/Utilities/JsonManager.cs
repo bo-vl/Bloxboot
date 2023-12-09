@@ -35,12 +35,27 @@ namespace Bloxboot.Utilities
         {
             if (!string.IsNullOrEmpty(jsonData))
             {
+                EnsureDirectoryExists(ClientSettingsPath);
+
+                if (!File.Exists(FileLocation))
+                {
+                    File.Create(FileLocation).Close();
+                }
+
                 jsonData += "\n}";
                 File.WriteAllText(FileLocation, jsonData);
             }
             else
             {
                 Console.WriteLine("No data to write. Add data before calling WriteFile.");
+            }
+        }
+
+        private static void EnsureDirectoryExists(string directoryPath)
+        {
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
             }
         }
     }
