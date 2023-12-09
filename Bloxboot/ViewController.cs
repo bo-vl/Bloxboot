@@ -25,6 +25,11 @@ namespace Bloxboot
             set { base.RepresentedObject = value; }
         }
 
+        partial void lighting(NSComboBoxCell sender)
+        {
+            Console.WriteLine(sender);
+        }
+
         partial void Framerate(NSTextField sender)
         {
             Console.WriteLine(sender.IntValue);

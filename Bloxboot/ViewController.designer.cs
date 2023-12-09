@@ -18,6 +18,9 @@ namespace Bloxboot
 		[Action ("Framerate:")]
 		partial void Framerate (AppKit.NSTextField sender);
 
+		[Action ("lighting:")]
+		partial void lighting (AppKit.NSComboBoxCell sender);
+
 		[Action ("Save:")]
 		partial void Save (AppKit.NSButton sender);
 		
