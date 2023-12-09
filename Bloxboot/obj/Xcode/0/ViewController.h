@@ -11,7 +11,8 @@
 
 @interface ViewController : NSViewController {
 }
-- (IBAction)Framerate:(NSTextFieldCell *)sender;
+- (IBAction)Save:(NSButton *)sender;
+- (IBAction)Framerate:(NSTextField *)sender;
 @property (strong) IBOutlet NSTabView *tabs;
 
 @end

@@ -11,4 +11,7 @@
 
 - (IBAction)Framerate:(NSTextFieldCell *)sender {
 }
+
+- (IBAction)Save:(NSButtonCell *)sender {
+}
 @end

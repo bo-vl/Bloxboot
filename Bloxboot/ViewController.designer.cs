@@ -16,7 +16,10 @@ namespace Bloxboot
 		AppKit.NSTabView tabs { get; set; }
 
 		[Action ("Framerate:")]
-		partial void Framerate (AppKit.NSTextFieldCell sender);
+		partial void Framerate (AppKit.NSTextField sender);
+
+		[Action ("Save:")]
+		partial void Save (AppKit.NSButton sender);
 		
 		void ReleaseDesignerOutlets ()
 		{

@@ -710,18 +710,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <tabView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EFM-3M-B7R">
+                            <tabView fixedFrame="YES" initialItem="XYU-Dv-Bwf" translatesAutoresizingMaskIntoConstraints="NO" id="EFM-3M-B7R">
                                 <rect key="frame" x="-8" y="-10" width="496" height="286"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
-                                    <tabViewItem label="FFlag" identifier="" id="dmQ-yo-SRh">
-                                        <view key="view" id="j4V-us-Zwt">
-                                            <rect key="frame" x="10" y="33" width="476" height="240"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        </view>
-                                    </tabViewItem>
-                                    <tabViewItem label="Misc" identifier="" id="XYU-Dv-Bwf">
+                                    <tabViewItem label="FFlag" identifier="" id="XYU-Dv-Bwf">
                                         <view key="view" id="yrY-MD-kw3">
                                             <rect key="frame" x="10" y="33" width="476" height="240"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -747,7 +741,24 @@
                                                         </connections>
                                                     </textFieldCell>
                                                 </textField>
+                                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a1s-Tn-2hN">
+                                                    <rect key="frame" x="422" y="-10" width="64" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mec-cv-CIX">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                        <connections>
+                                                            <action selector="Save:" target="XfG-lQ-9wD" id="iht-eQ-sgr"/>
+                                                        </connections>
+                                                    </buttonCell>
+                                                </button>
                                             </subviews>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Misc" identifier="" id="dmQ-yo-SRh">
+                                        <view key="view" id="j4V-us-Zwt">
+                                            <rect key="frame" x="10" y="33" width="476" height="240"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                     </tabViewItem>
                                 </tabViewItems>
