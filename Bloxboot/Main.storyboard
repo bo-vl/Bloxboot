@@ -740,15 +740,6 @@
                                                         </connections>
                                                     </buttonCell>
                                                 </button>
-                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RNB-dw-72W">
-                                                    <rect key="frame" x="11" y="188" width="53" height="16"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Lighting" id="LjA-3P-tcU">
-                                                        <font key="font" metaFont="system"/>
-                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                </textField>
                                                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vX7-Xq-EaJ">
                                                     <rect key="frame" x="70" y="216" width="96" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -761,23 +752,6 @@
                                                         </connections>
                                                     </textFieldCell>
                                                 </textField>
-                                                <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dgG-W6-IQW">
-                                                    <rect key="frame" x="71" y="180" width="99" height="23"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="ECR-j5-pQB">
-                                                        <font key="font" metaFont="system"/>
-                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                        <objectValues>
-                                                            <string>Item 1</string>
-                                                            <string>Item 2</string>
-                                                            <string>Item 3</string>
-                                                        </objectValues>
-                                                        <connections>
-                                                            <action selector="lighting:" target="XfG-lQ-9wD" id="1UD-Px-rMX"/>
-                                                        </connections>
-                                                    </comboBoxCell>
-                                                </comboBox>
                                             </subviews>
                                         </view>
                                     </tabViewItem>
