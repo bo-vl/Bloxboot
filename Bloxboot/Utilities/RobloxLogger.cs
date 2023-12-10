@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Bloxboot.Utilities
@@ -13,7 +14,7 @@ namespace Bloxboot.Utilities
 
         private static string Logspath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Library", "Logs", "Roblox");
 
-        private static string GetLatestLog(string search)
+        public static string GetLatestLog(string search)
         {
             string logspathExpanded = Environment.ExpandEnvironmentVariables(Logspath);
 
@@ -33,6 +34,7 @@ namespace Bloxboot.Utilities
                     {
                         if (entry.Contains(search))
                         {
+                            Console.WriteLine($"Found: {entry}");
                             return entry.Trim();
                         }
                     }
@@ -54,12 +56,6 @@ namespace Bloxboot.Utilities
             return null;
         }
 
-        private static string GetGameId()
-        {
-            const string search = "[FLog::Output] ! Joining game";
-            string latestLogEntry = GetLatestLog(search);
-            return latestLogEntry?.Split(" ").LastOrDefault();
-        }
 
         private static async Task<Dictionary<string, string>> GetServerLocationInfo(string serverLocation)
         {
@@ -67,19 +63,41 @@ namespace Bloxboot.Utilities
             const string regionUrl = "https://ipinfo.io/{0}/region";
             const string countryUrl = "https://ipinfo.io/{0}/country";
 
-            var cityResponse = await httpClient.GetStringAsync(string.Format(cityUrl, serverLocation));
-            var regionResponse = await httpClient.GetStringAsync(string.Format(regionUrl, serverLocation));
-            var countryResponse = await httpClient.GetStringAsync(string.Format(countryUrl, serverLocation));
+            var combinedUrl = string.Format(cityUrl, serverLocation);
+
+            var responses = await Task.WhenAll(
+                httpClient.GetStringAsync(string.Format(cityUrl, serverLocation)),
+                httpClient.GetStringAsync(string.Format(regionUrl, serverLocation)),
+                httpClient.GetStringAsync(string.Format(countryUrl, serverLocation))
+            );
 
             return new Dictionary<string, string>
             {
-                ["city"] = cityResponse?.Trim(),
-                ["region"] = regionResponse?.Trim(),
-                ["country"] = countryResponse?.Trim(),
+                ["city"] = responses[0]?.Trim(),
+                ["region"] = responses[1]?.Trim(),
+                ["country"] = responses[2]?.Trim(),
             };
         }
 
-        private static string CheckActivity()
+        private static string GetGameId(string logEntry)
+        {
+            const string search = "[FLog::Output] ! Joining game";
+
+            if (!string.IsNullOrEmpty(logEntry) && logEntry.Contains(search))
+            {
+                var match = Regex.Match(logEntry, @"game '(.*?)'");
+
+                if (match.Success && match.Groups.Count > 1)
+                {
+                    return match.Groups[1].Value;
+                }
+            }
+
+            return null;
+        }
+
+
+        public static string CheckActivity()
         {
             const string join = "[FLog::Output] ! Joining game";
             const string leave = "[FLog::Network] Time to disconnect replication data";
@@ -87,59 +105,48 @@ namespace Bloxboot.Utilities
             string joinLogs = GetLatestLog(join);
             string leaveLogs = GetLatestLog(leave);
 
-            if (leaveLogs != null && joinLogs != null)
+            if (!string.IsNullOrEmpty(joinLogs) && !string.IsNullOrEmpty(leaveLogs))
             {
-                return DateTime.Parse(leaveLogs) > DateTime.Parse(joinLogs)
-                    ? "You are not in a game."
-                    : $"You are in a game. Game ID: {GetGameId()}\nServer Location: {GetServerLocationInfo(leaveLogs).Result["city"]}, {GetServerLocationInfo(leaveLogs).Result["region"]}, {GetServerLocationInfo(leaveLogs).Result["country"]}";
-            }
+                DateTime? joinTime = ParseLogDateTime(joinLogs);
+                DateTime? leaveTime = ParseLogDateTime(leaveLogs);
 
-            if (joinLogs != null)
-            {
-                return $"You are in a game. Game ID: {GetGameId()}\nServer Location: {GetServerLocationInfo(joinLogs).Result["city"]}, {GetServerLocationInfo(joinLogs).Result["region"]}, {GetServerLocationInfo(joinLogs).Result["country"]}";
-            }
+                Console.WriteLine($"Join time: {joinTime}");
+                Console.WriteLine($"Leave time: {leaveTime}");
 
-            return "No relevant logs found.";
-        }
-
-        private static void SendNotification(string mode, Dictionary<string, string> data = null)
-        {
-            string title = "Roblox Notification";
-            string message = "";
-
-            if (mode == "ServerInfo")
-            {
-                if (data != null)
+                if (joinTime != null && leaveTime != null)
                 {
-                    message = $"Server Location: {data["city"]}, {data["region"]}, {data["country"]}";
-                }
-                else
-                {
-                    message = "Failed to retrieve server location information.";
-                }
-            }
-            else if (mode == "GameInfo")
-            {
-                if (data != null)
-                {
-                    message = $"You are in a game. Game ID: {data["game_id"]}";
-                    var locationInfo = GetServerLocationInfo(data["leave_logs"]).Result;
-                    if (locationInfo != null)
+                    if (leaveTime < joinTime)
                     {
-                        message += $"\nServer Location: {locationInfo["city"]}, {locationInfo["region"]}, {locationInfo["country"]}";
+                        return "You are in a game";
                     }
                     else
                     {
-                        message += "\nFailed to retrieve server location information.";
+                        return "you are not in a game";
                     }
-                }
-                else
-                {
-                    message = "You are not in a game.";
                 }
             }
 
-            Console.WriteLine($"{title}: {message}");
+            return "Failed to determine activity."; 
+        }
+
+
+        private static DateTime? ParseLogDateTime(string logEntry)
+        {
+            var match = Regex.Match(logEntry, @"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z");
+
+            if (match.Success)
+            {
+                if (DateTime.TryParseExact(match.Value, "yyyy-MM-ddTHH:mm:ss.fffZ", null, System.Globalization.DateTimeStyles.AssumeUniversal, out var dateTime))
+                {
+                    return dateTime;
+                }
+                else if (DateTime.TryParseExact(match.Value, "yyyy-MM-ddTHH:mm:ssZ", null, System.Globalization.DateTimeStyles.AssumeUniversal, out dateTime))
+                {
+                    return dateTime;
+                }
+            }
+
+            return null;
         }
     }
 }

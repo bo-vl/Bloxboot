@@ -2,6 +2,7 @@
 using AppKit;
 using Bloxboot.Utilities;
 using Foundation;
+using System.Timers;
 
 namespace Bloxboot
 {
@@ -11,6 +12,9 @@ namespace Bloxboot
         RobloxLogger robloxLogger = new RobloxLogger();
         public int fps;
 
+        private const int checkIntervalMilliseconds = 5000;
+        private Timer activityCheckTimer;
+
         public ViewController(IntPtr handle) : base(handle)
         {
         }
@@ -18,7 +22,7 @@ namespace Bloxboot
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            CheckAndDisplayActivity();
+            SetupTimer();
         }
 
         public override NSObject RepresentedObject
@@ -45,11 +49,23 @@ namespace Bloxboot
             jsonManager.WriteFile();
         }
 
+        private void SetupTimer()
+        {
+            activityCheckTimer = new Timer(checkIntervalMilliseconds);
+            activityCheckTimer.Elapsed += ActivityCheckTimer_Elapsed;
+            activityCheckTimer.AutoReset = true;
+            activityCheckTimer.Start();
+        }
+
+        private void ActivityCheckTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            CheckAndDisplayActivity();
+        }
+
         private void CheckAndDisplayActivity()
         {
             string activityResult = RobloxLogger.CheckActivity();
             Console.WriteLine(activityResult);
-
         }
     }
 }
