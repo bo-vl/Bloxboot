@@ -78,6 +78,7 @@
       <DependentUpon>ViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilities\JsonManager.cs" />
+    <Compile Include="Utilities\Server.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
