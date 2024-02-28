@@ -6,9 +6,9 @@
 	<dict>
 		<key>output-files</key>
 		<array>
-			<string>/Users/bovanlaarhoven/Projects/Bloxboot/Bloxboot/obj/Debug/actool/bundle/AppIcon.icns</string>
-			<string>/Users/bovanlaarhoven/Projects/Bloxboot/Bloxboot/obj/Debug/actool/bundle/Assets.car</string>
-			<string>/Users/bovanlaarhoven/Projects/Bloxboot/Bloxboot/obj/Debug/actool/partial-info.plist</string>
+			<string>/Users/bovanlaarhoven/Documents/GitHub/Bloxboot/Bloxboot/obj/Debug/actool/bundle/AppIcon.icns</string>
+			<string>/Users/bovanlaarhoven/Documents/GitHub/Bloxboot/Bloxboot/obj/Debug/actool/bundle/Assets.car</string>
+			<string>/Users/bovanlaarhoven/Documents/GitHub/Bloxboot/Bloxboot/obj/Debug/actool/partial-info.plist</string>
 		</array>
 	</dict>
 </dict>
